@@ -21,7 +21,7 @@ function onInit() {
         // .then(() => {
         //     console.log('Map is ready')
         //     return locService.getLocs().then((locs) =>  renderPlaces(locs))
-           
+
         // })
         .catch((err) => console.log('Error: cannot init map', err))
 }
@@ -55,26 +55,27 @@ function onGetUserPos() {
             console.log('User position is:', pos.coords)
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
-                onPanTo(pos.coords.latitude,pos.coords.longitude)
+            onPanTo(pos.coords.latitude, pos.coords.longitude)
         })
         .catch(err => {
             console.log('err!!!', err)
         })
 }
-function onPanTo(lat,lng) {
+function onPanTo(lat, lng) {
     console.log('Panning the Map')
     mapService.panTo(lat, lng)
 }
 
-function onDelete(id){
-    console.log('hi');
-    storageService.remove(STORAGE_KEY_LOCS,id)
-    .then(renderPlaces)
+function onDelete(id) {
+    console.log('hi from onDelete');
+    locService.deleteLoc(id)
+
+        .then(renderPlaces)
 }
 
-function renderPlaces(locs){
-var strHTMLs = locs.map(loc => {
-    return `
+function renderPlaces(locs) {
+    var strHTMLs = locs.map(loc => {
+        return `
    <tr> <td> <h4>${loc.name}</h4></td>
     <td> <h4>${loc.lat}</h4></td>
     <td> <h4>${loc.lng}</h4></td>
@@ -84,6 +85,6 @@ var strHTMLs = locs.map(loc => {
     <td> <button onclick="onDelete(${loc.id})">Delete</button> </td>
     </tr>
    `
-})
- document.querySelector('.bla').innerHTML = strHTMLs.join('')
+    })
+    document.querySelector('.bla').innerHTML = strHTMLs.join('')
 }
