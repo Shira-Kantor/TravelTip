@@ -17,7 +17,7 @@ return {id: utilService.makeId(),
       lat: '', 
       lng: '', 
        createdAt: '',
-        updatedAt}
+        updatedAt: ''}
 }
 
 
