@@ -11,10 +11,10 @@
 <body>
     <header>
         <h1>TravelTip</h1>
-        <form onsubmit="onSearch(ev)">
-            <input type="text">
-            <button>GO</button>
-        </form>
+        <div class="search">
+            <input type="text" placeholder="Enter Location" class="text-input">
+            <button onclick="onSearch()">GO</button>
+        </div>
         <button onclick="onGetUserPos()">My Location</button>
     </header>
     <main>
@@ -39,6 +39,8 @@
         </p>
 
     </main>
+    <script src="./lib/axios.js"></script>
+    
     <script type="module" src="js/app.controller.js"></script>
 </body>
 

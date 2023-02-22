@@ -3,7 +3,10 @@ import { storageService } from "./async-storage.service.js";
 
 export const locService = {
     getLocs,
-    deleteLoc
+    deleteLoc,
+    addLoc,
+    
+    
 }
 
 const STORAGE_KEY_LOCS = 'locsDB'
@@ -22,7 +25,7 @@ function creatEmptyLoc() {
         lat: '',
         lng: '',
         createdAt: utilService.formatDate(new Date()),
-        updatedAt: ''
+        updatedAt: utilService.formatDate(new Date())
     }
 }
 
@@ -41,4 +44,13 @@ function getLocs() {
 function deleteLoc(id){
     console.log('im from deleteLoc');
     storageService.remove(STORAGE_KEY_LOCS,id)
+}
+
+function addLoc(loc,name) {
+   const newLoc = creatEmptyLoc()
+   const {lat,lng} =loc
+   newLoc.lat = lat
+   newLoc.lng = lng
+   newLoc.name = name
+    storageService.post(STORAGE_KEY_LOCS,newLoc)
 }

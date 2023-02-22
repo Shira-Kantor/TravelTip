@@ -1,12 +1,13 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
-import { storageService } from './services/async-storage.service.js'
+import { searchService } from "./services/search.service.js";
+// import { storageService } from './services/async-storage.service.js'
 
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onDelete = onDelete
-
+window.onSearch = onSearch
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 // window.renderPlaces = renderPlaces
@@ -61,6 +62,7 @@ function onGetUserPos() {
             console.log('err!!!', err)
         })
 }
+
 function onPanTo(lat, lng) {
     console.log('Panning the Map')
     mapService.panTo(lat, lng)
@@ -87,4 +89,18 @@ function renderPlaces(locs) {
    `
     })
     document.querySelector('.bla').innerHTML = strHTMLs.join('')
+}
+
+function onSearch() {
+   
+    const keyWord = document.querySelector('.text-input').value
+    console.log('keyWord',keyWord)
+
+    searchService.getGeocode(keyWord)
+    .then(console.log('from controller', res))
+
+
+    // onPanTo(lat, lng)
+    // addLoc
+
 }

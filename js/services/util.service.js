@@ -1,7 +1,8 @@
 export const utilService = {
-   
     makeId,
-    formatDate
+    formatDate,
+    saveToStorage,
+    loadFromStorage
 }
 
 
@@ -23,8 +24,18 @@ function getRandomIntInclusive(min, max) {
 
 function formatDate(date) {
     return [
-       (date.getDate()).toString().padStart(2, '0'),
-     (date.getMonth() + 1).toString().padStart(2, '0'),,
-      date.getFullYear(),
+        (date.getDate()).toString().padStart(2, '0'),
+        (date.getMonth() + 1).toString().padStart(2, '0'), ,
+        date.getFullYear(),
     ].join('/');
-  }
+}
+
+
+function saveToStorage(key, val) {
+    localStorage.setItem(key, JSON.stringify(val))
+}
+
+function loadFromStorage(key) {
+    var val = localStorage.getItem(key)
+    return JSON.parse(val)
+}
