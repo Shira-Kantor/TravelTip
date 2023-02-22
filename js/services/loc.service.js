@@ -26,9 +26,9 @@ function creatEmptyLoc() {
 
 
 function getLocs() {
-    // if()
-    const termlocsMap = utilService.load(STORAGE_KEY_LOCS) || {}
-    if (termlocsMap[locs]) return Promise.resolve(termlocsMap[locs])
+    
+    const termlocsMap = utilService.load(STORAGE_KEY_LOCS) || []
+    if (!termlocsMap.length) utilService.save(STORAGE_KEY_LOCS,locs)
 
     return new Promise((resolve, reject) => {
         setTimeout(() => {
