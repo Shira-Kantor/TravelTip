@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+    margin: 0;
+    display: grid;
+    grid-template-rows: 80px 100px 1fr;
+}
+
+.header {
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: lightsteelblue;
+}
+
+.logo {
+    margin-inline-start: 20px;
+    /* color:crimson; */
+    color: orangered
+}
+
+.search {
+    margin-inline-end: 20px;
+}
+
+.search>*,
+.btn-copy-loc {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+
+}
+
+.search .text-input {
+    width: 200px;
+}
+
+.search .btn-search {
+    background-color: orangered;
+    color: white;
+    cursor: pointer;
+}
+
+.search .btn-my-loc {
+    background-color: whitesmoke;
+    cursor: pointer;
+}
+
+.main {
+    padding-inline: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 5fr;
+    gap: 20px;
+    align-items: center;
+
+    height: fit-content;
+    /* justify-items: start; */
+}
+
+.location-title {
+    grid-row: 1;
+    grid-column: 1 / span 3;
+    color: rgb(45, 86, 119);
+}
+
+.location-title .searched-location {
+    font-size: 1em;
+}
+
+.btn-copy-loc {
+    grid-row: 1;
+    grid-column: 4 / span 2;
+
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    justify-self: end;
+
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: rgb(255, 128, 81);
+}
+
+.locations-list {
+    grid-row: 2;
+    grid-column: 1 / span 2;
+    align-self: start;
+    /* overflow-y: scroll; */
+    background-color: rgba(176, 196, 222, 0.267);
+    border: solid 1.5px steelblue;
+    border-radius: 5px;
+    padding: 10px;
+    height: 400px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.locations-list .location {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    gap: 2px;
+    margin-block-end: 10px;
+    padding: 10px;
+    box-shadow: 0px 0px 3px 0px steelblue;
+}
+
+/* .locations-list .location .loc-infos {
+    display: flex;
+    flex-direction: column;
+} */
+
+.locations-list .location .loc-name {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-block-end: 10px;
+}
+
+.locations-list .location .loc-lat,
+.locations-list .location .loc-lng {
+    font-style: italic;
+    font-size: 0.7em;
+    color: orangered;
+}
+
+.locations-list .location .loc-created {
+    margin-block-start: 10px;
+    font-size: 0.7em;
+}
+
+.locations-list .location .loc-updated {
+    font-size: 0.7em;
+}
+
+.locations-list .location .btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.locations-list .location .btns>* {
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    width: 50px;
+    height: 30px;
+}
+
+.locations-list .location .btns .loc-btn-go {
+    background-color: rgb(48, 139, 214);
+    color: white;
+}
+
+.locations-list .location .btns .loc-btn-delete {
+    background-color: rgb(234, 234, 234);
+    border:1px solid lightgrey;
+}
+
+.map-container {
+    grid-row: 2;
+    grid-column: 3 / span 3;
+
+    box-shadow: 0px 0px 4px 0px steelblue;
+}

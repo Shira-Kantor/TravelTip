@@ -55,6 +55,7 @@ function addMarker(loc) {
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng)
     gMap.panTo(laLatLng)
+    return Promise.resolve({lat,lng})
 }
 
 
