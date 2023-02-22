@@ -1,18 +1,29 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
+import { storageService } from './services/async-storage.service.js'
 
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
+window.onDelete = onDelete
+
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+// window.renderPlaces = renderPlaces
+
 
 function onInit() {
     mapService.initMap()
-        .then(() => {
-            console.log('Map is ready')
-        })
-        .catch(() => console.log('Error: cannot init map'))
+        .then(locService.getLocs)
+        .then(renderPlaces)
+
+        // })
+        // .then(() => {
+        //     console.log('Map is ready')
+        //     return locService.getLocs().then((locs) =>  renderPlaces(locs))
+           
+        // })
+        .catch((err) => console.log('Error: cannot init map', err))
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -47,7 +58,29 @@ function onGetUserPos() {
             console.log('err!!!', err)
         })
 }
-function onPanTo() {
+function onPanTo(lat,lng) {
     console.log('Panning the Map')
-    mapService.panTo(35.6895, 139.6917)
+    mapService.panTo(lat, lng)
+}
+
+function onDelete(id){
+    console.log('hi');
+    storageService.remove(STORAGE_KEY_LOCS,id)
+    .then(renderPlaces)
+}
+
+function renderPlaces(locs){
+var strHTMLs = locs.map(loc => {
+    return `
+   <tr> <td> <h4>${loc.name}</h4></td>
+    <td> <h4>${loc.lat}</h4></td>
+    <td> <h4>${loc.lng}</h4></td>
+    <td> <h4>creaded: ${loc.createdAt}</h4></td>
+    <td> <h4>Last update: ${loc.updatedAt}</h4></td>
+    <td>  <button onclick="onPanTo(${loc.lat},${loc.lng})">Go</button> </td>
+    <td> <button onclick="onDelete(${loc.id})">Delete</button> </td>
+    </tr>
+   `
+})
+ document.querySelector('.bla').innerHTML = strHTMLs.join('')
 }
